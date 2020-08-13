@@ -116,5 +116,59 @@ function showCalTime(n){
 
 
 
-showCalTime(40)
+// showCalTime(40)
+
+var arr1 = [1,2,3,4,5,10,11]
+var arr2 = [3,4,5,6,7,8,9]
+
+console.log(" getUpMedian == " + getUpMedian(arr1,arr2));
+
+function getUpMedian(arr1, arr2){
+
+	if(arr2 == null || arr1 == null){
+		return -1
+	}
+
+	return  find(arr1,0, arr1.length-1, arr2, 0, arr2.length-1)
+
+}
+
+function find(arr1, l1, r1, arr2, l2, r2){
+	var mid1 = l1 + (r1 - l1) / 2
+	var mid2 = l2 + (r2 - l2) / 2
+
+
+
+
+
+
+	mid1 = Math.floor(mid1) 
+	mid2 = Math.floor(mid2)
+
+	// 表示数组只剩下⼀个数，把两个数组中较⼩的数返回去
+	if(l1 >= r1){
+		return Math.min(arr1[l1], arr2[l2])
+	}
+
+	// console.log("l1 == " + l1 + " r1 == " + r1)
+	// console.log("l2 == " + l2 + " r2 == " + r2)
+	
+	// console.log("mid1 == " + mid1)
+	// console.log("l2 == " + l2 + " r2 == " + r2)
+	// console.log("mid2 == " + mid2 + "\n")
+
+	// 元素个数为奇数，则offset为0，为偶数则 offset 为 1
+	var offset =  (r1 - l1 + 1) % 2 == 0 ? 1:0
+
+
+	if(arr1[mid1] < arr2[mid2]){
+		return find(arr1, mid1 + offset , r1, arr2, l2, mid2)
+	} else if(arr1[mid1] > arr2[mid2]){
+		return find(arr1, l1, mid1, arr2, mid2 + offset, r2)
+	} else {
+		return arr1[mid1]
+	}
+
+}
+
 
